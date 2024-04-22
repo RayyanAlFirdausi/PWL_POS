@@ -35,9 +35,9 @@ class POSController extends Controller
             'nama' => 'required',
         ]);
 
-        m_user::created($request->all());
+        m_user::create($request->all());
 
-        return redirect()->route('m_user.index')->with('success', 'user Berhasil ditambahkan');
+        return redirect()->route('m_user.index')->with('success', 'user Berhasil Ditambahkan');
     }
 
     /**
@@ -68,8 +68,10 @@ class POSController extends Controller
             'nama' => 'required',
             'password' => 'required',
         ]);
+
         m_user::find($id)->update($request->all());
-        return redirect()->route('m_user.index')->with('success', 'Data berhasil diupdate');
+
+        return redirect()->route('m_user.index')->with('success', 'Data Berhasil Diupdate');
     }
 
     /**
@@ -78,6 +80,7 @@ class POSController extends Controller
     public function destroy(string $id)
     {
         $useri = m_user::findOrFail($id)->delete();
-        return \redirect()->route('m_user.index')->with('success', 'data berhasil dihapus');
+
+        return \redirect()->route('m_user,index')->with('success', 'Data Berhasil Dihapus');
     }
 }

@@ -28,7 +28,7 @@ class UserController extends Controller
 
         $level = LevelModel::all(); // ambil data level untuk filter level
 
-        return view('user.index', ['breadcrumb' => $breadcrumb, 'page' => $page, 'activeMenu' => $activeMenu]);
+        return view('user.index', ['breadcrumb' => $breadcrumb, 'page' => $page, 'level' => $level, 'activeMenu' => $activeMenu]);
     }
 
     // Ambil data user dalam bentuk json untuk datatables
@@ -38,7 +38,7 @@ class UserController extends Controller
 
         // Filter data user berdasarkan level_id
         if ($request->level_id) {
-            $user->where('level_id', $request->level_id);
+            $users->where('level_id', $request->level_id);
         }
 
         return DataTables::of($users)
@@ -77,7 +77,7 @@ class UserController extends Controller
 
         $request->validate([
             // Username harus diisi, berupa string, minimal 3 karakter dan bernilai unik di table m_user kolom username
-            'username' => 'required|string|min:3|unique:m_user, username',
+            'username' => 'required|string|min:3|unique:m_user,username',
             'nama'     => 'required|string|max:100', // nama harus diisi, berupa string, dan maksimal 100 karakter
             'password' => 'required|min:5', // password harus diisi dan minimal 5 karakter
             'level_id' => 'required|integer' // level_id harus diisi dan berupa angka
@@ -99,7 +99,7 @@ class UserController extends Controller
 
         $breadcrumb = (object) [
             'title' => 'Detail User',
-            'list'  => ['Home', 'Detail']
+            'list'  => ['Home', 'User', 'Detail']
         ];
 
         $page = (object) [
@@ -127,7 +127,7 @@ class UserController extends Controller
 
         $activeMenu = 'user'; // set menu yang sedang aktif
 
-        return view('user.edit', ['breadcrumb' => $breadcrumb, 'page' => $page, 'user' => $user, 'level' => $user, 'activeMenu' => $activeMenu]);
+        return view('user.edit', ['breadcrumb' => $breadcrumb, 'page' => $page, 'user' => $user, 'level' => $level, 'activeMenu' => $activeMenu]);
     }
 
     // Menyimpan perubahan data user
@@ -145,6 +145,7 @@ class UserController extends Controller
             'username' => $request->username,
             'nama'     => $request->nama,
             'password' => $request->password ? bcrypt($request->password) : UserModel::find($id)->password,
+            'level_id' => $request->level_id
         ]);
 
         return redirect('/user')->with('success', 'Data user berhasil diubah');
@@ -160,7 +161,7 @@ class UserController extends Controller
         try{
             UserModel::destroy($id); // Hapus data level
 
-            return redirect('/user')->with('success', 'Data user berhasul dihapus');
+            return redirect('/user')->with('success', 'Data user berhasil dihapus');
         } 
         
         catch (\Illuminate\Database\QueryException $e) {

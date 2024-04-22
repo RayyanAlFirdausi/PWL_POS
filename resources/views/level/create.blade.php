@@ -8,26 +8,26 @@
         </div>
            
         <div class="card-body">
-            <form method="POST" action="{{ url('kategori') }}" class="form-horizontal">
+            <form method="POST" action="{{ url('level') }}" class="form-horizontal">
                 @csrf
                 
                 <div class="form-group row">
-                    <label for="kategori_kode" class="col-1 control-label col-form-label">Kode</label>
+                    <label for="level_kode" class="col-1 control-label col-form-label">Kode</label>
                     <div class="col-11">
-                        <input type="text" class="form-control" name="kategori_kode" id="kategori_kode" value="{{ old('kategori_kode') }}">
+                        <input type="text" class="form-control" name="level_kode" id="level_kode" value="{{ old('level_kode') }}">
                     </div>
 
-                    @error('kategori_kode')
+                    @error('level_kode')
                             <small class="form-text text-danger">{{ $message }}</small>
                     @enderror
                 </div>
 
                 <div class="form-group row">
-                    <label for="kategori_nama" class="col-1 control-label col-form-label">Nama</label>
+                    <label for="level_nama" class="col-1 control-label col-form-label">Nama</label>
                     <div class="col-11">
-                        <input type="text" class="form-control" id="kategori_nama" name="kategori_nama" value="{{ old('kategori_nama') }}" required>
+                        <input type="text" class="form-control" id="level_nama" name="level_nama" value="{{ old('level_nama') }}" required>
                         
-                        @error('kategori_nama')
+                        @error('level_nama')
                             <small class="form-text text-danger">{{ $message }}</small>
                         @enderror
                     </div>
@@ -37,7 +37,7 @@
                     <label class="col-1 control-label col-form-label"></label>
                     <div class="col-11">
                         <button type="submit" class="btn btn-primary btn-sm">Simpan</button>
-                        <a class="btn btn-sm btn-default ml-1" href="{{ url('kategori') }}">Kembali</a>
+                        <a class="btn btn-sm btn-default ml-1" href="{{ url('level') }}">Kembali</a>
                     </div>
                 </div>
             </form>
