@@ -47,7 +47,20 @@ class PenjualanController extends Controller
      */
     public function create()
     {
-        //
+        $breadcrumb = (object) [
+            'title' => 'Tambah transaksi penjualan',
+            'list'  => ['Home', 'Penjualan', 'Tambah']
+        ];
+
+        $page = (object) [
+            'title' => 'Tambah transaksi penjualan'
+        ];
+
+        $kategori = PenjualanModel::all();
+
+        $activeMenu = 'penjualan';
+
+        return view('barang.create', ['breadcrumb' => $breadcrumb, 'page' => $page, 'kategori' => $kategori, 'activeMenu' => $activeMenu]);
     }
 
     /**

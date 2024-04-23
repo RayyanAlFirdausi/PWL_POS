@@ -10,7 +10,7 @@ class PenjualanDetailModel extends Model
 {
     use HasFactory;
 
-    protected $table = 't_penjualan_detail';
+    protected $table = 'm_penjualan_detail';
     protected $primaryKey = 'detail_id';
     protected $fillable = ['penjualan_id', 'barang_id', 'harga', 'jumlah'];
 
