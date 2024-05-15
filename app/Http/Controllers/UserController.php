@@ -81,7 +81,7 @@ class UserController extends Controller
             'nama'     => 'required|string|max:100', // nama harus diisi, berupa string, dan maksimal 100 karakter
             'password' => 'required|min:5', // password harus diisi dan minimal 5 karakter
             'level_id' => 'required|integer', // level_id harus diisi dan berupa angka
-            'image'     => 'required|file|image|max:5000'
+            'image'    => 'required|file|image|max:5000'
         ]);
 
         $extFile = $request->image->extension();
@@ -97,7 +97,7 @@ class UserController extends Controller
             'nama'     => $request->nama,
             'password' => bcrypt($request->password), // Password dienkripsi sebelum disimpan
             'level_id' => $request->level_id,
-            'image'     => $newPath
+            'image'    => $newPath
         ]);
 
         return redirect('/user')->with('success', 'Data user berhasil disimpan');

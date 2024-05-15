@@ -26,6 +26,29 @@ class FileUploadController extends Controller
             echo "<br>";
             echo "Tampilkan link:<a href='$pathBaru'>$pathBaru</a>";
     }
+
+    public function fileUploadRename()
+    {
+        return view('file-upload-rename');
+    }
+
+    public function prosesFileUploadRename(Request $request)
+    {
+        $request->validate([
+            'berkas' => 'required|file|image|max:5000']);
+            $extFile = $request->berkas->extension();
+            $nameFile = $request->namaGambar . '.' . $extFile;
+
+            $path = $request->berkas->move('gambar', $nameFile);
+            $path = str_replace("\\", "//", $path);
+    
+            $pathBaru = asset('gambar/' . $nameFile);
+    
+            echo "Gambar berhasil di upload ke <a href='$pathBaru'>$nameFile</a>";
+            echo "<br>";
+            echo "<img src='$pathBaru'>";
+
+    }
 }
 
 // if($request->hasFile('berkas')) {
